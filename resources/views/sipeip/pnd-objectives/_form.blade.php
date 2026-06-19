@@ -1,0 +1,10 @@
+@csrf
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div><x-input-label for="code" value="Codigo" /><x-text-input id="code" name="code" class="mt-1 block w-full" value="{{ old('code', $pndObjective->code) }}" required /><x-input-error :messages="$errors->get('code')" class="mt-2" /></div>
+    <div><x-input-label for="axis" value="Eje" /><x-text-input id="axis" name="axis" class="mt-1 block w-full" value="{{ old('axis', $pndObjective->axis) }}" required /><x-input-error :messages="$errors->get('axis')" class="mt-2" /></div>
+    <div class="md:col-span-2"><x-input-label for="name" value="Nombre" /><x-text-input id="name" name="name" class="mt-1 block w-full" value="{{ old('name', $pndObjective->name) }}" required /><x-input-error :messages="$errors->get('name')" class="mt-2" /></div>
+    <div><x-input-label for="policy" value="Politica" /><textarea id="policy" name="policy" rows="3" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('policy', $pndObjective->policy) }}</textarea></div>
+    <div><x-input-label for="status" value="Estado" /><select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"><option value="active" @selected(old('status', $pndObjective->status) === 'active')>Activo</option><option value="inactive" @selected(old('status', $pndObjective->status) === 'inactive')>Inactivo</option></select></div>
+    <div class="md:col-span-2"><x-input-label for="description" value="Descripcion" /><textarea id="description" name="description" rows="3" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description', $pndObjective->description) }}</textarea></div>
+</div>
+<div class="mt-6 flex items-center gap-3"><x-primary-button>Guardar</x-primary-button><a href="{{ route('pnd-objectives.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Cancelar</a></div>

@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Laravel tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: sipeip_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d sipeip_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Descargar el codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: pdo_pgsql, pgsql, mbstring, xml, curl, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Instalar dependencias de Composer
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Instalar dependencias de Node
+        run: npm ci
+
+      - name: Preparar la aplicacion
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Verificar estilo con Pint
+        run: ./vendor/bin/pint --test
+
+      - name: Compilar assets
+        run: npm run build
+
+      - name: Ejecutar migraciones
+        run: php artisan migrate --force
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 5432
+          DB_DATABASE: sipeip_test
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          SESSION_DRIVER: array
+          CACHE_STORE: array
+          QUEUE_CONNECTION: sync
+
+      - name: Ejecutar pruebas
+        run: php artisan test
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 5432
+          DB_DATABASE: sipeip_test
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          SESSION_DRIVER: array
+          CACHE_STORE: array
+          QUEUE_CONNECTION: sync

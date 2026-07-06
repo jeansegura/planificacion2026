@@ -228,7 +228,7 @@ class InstitutionalUserController extends Controller
 
     private function resolvePassword(array $data, bool $creating, bool $resetting = false): string
     {
-        if (! empty($data['password']) && ! ($data['generate_password'] ?? false) && ! $resetting) {
+        if (! empty($data['password'])) {
             return $data['password'];
         }
 

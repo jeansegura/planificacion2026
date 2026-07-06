@@ -1,3 +1,4 @@
+{{-- Vista Blade de componente reutilizable de interfaz; renderiza una parte de la interfaz. --}}
 @props([
     'name',
     'show' => false,
@@ -18,10 +19,10 @@ $maxWidth = [
     x-data="{
         show: @js($show),
         focusables() {
-            // All focusable element types...
+            // Tipos de elementos que pueden recibir foco.
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
             return [...$el.querySelectorAll(selector)]
-                // All non-disabled elements...
+                // Elementos habilitados dentro del modal.
                 .filter(el => ! el.hasAttribute('disabled'))
         },
         firstFocusable() { return this.focusables()[0] },

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para verificacion de correo; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +16,7 @@ use Illuminate\View\View;
 class EmailVerificationPromptController extends Controller
 {
     /**
-     * Display the email verification prompt.
+     * Muestra el aviso de verificacion de correo.
      */
     public function __invoke(Request $request): RedirectResponse|View
     {

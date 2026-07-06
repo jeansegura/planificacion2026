@@ -1,3 +1,4 @@
+{{-- Vista Blade de componente reutilizable de interfaz; renderiza una parte de la interfaz. --}}
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
 
 @php

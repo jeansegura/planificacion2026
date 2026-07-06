@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa proyectos de inversion, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,16 +49,19 @@ class InvestmentProject extends Model
         ];
     }
 
+    // Relaciona el usuario con su entidad publica.
     public function publicEntity(): BelongsTo
     {
         return $this->belongsTo(PublicEntity::class);
     }
 
+    // Relaciona el registro con su objetivo institucional.
     public function institutionalObjective(): BelongsTo
     {
         return $this->belongsTo(InstitutionalObjective::class);
     }
 
+    // Obtiene los documentos del expediente.
     public function documents(): HasMany
     {
         return $this->hasMany(ProjectDocument::class);

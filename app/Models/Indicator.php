@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa indicadores, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,16 +39,19 @@ class Indicator extends Model
         ];
     }
 
+    // Ejecuta la accion principal de este bloque.
     public function institutionalGoal(): BelongsTo
     {
         return $this->belongsTo(InstitutionalGoal::class);
     }
 
+    // Relaciona el registro con su objetivo institucional.
     public function institutionalObjective(): BelongsTo
     {
         return $this->belongsTo(InstitutionalObjective::class);
     }
 
+    // Calcula el porcentaje de avance del indicador.
     public function progress(): float
     {
         if (! $this->target_value || (float) $this->target_value === 0.0) {

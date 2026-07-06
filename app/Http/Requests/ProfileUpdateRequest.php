@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Request de validacion para perfil del usuario; concentra reglas antes de ejecutar la accion del controlador.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Requests;
 
 use App\Models\User;
@@ -10,7 +16,7 @@ use Illuminate\Validation\Rule;
 class ProfileUpdateRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
+     * Define las reglas de validacion de la solicitud.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */

@@ -1,4 +1,5 @@
-@php($canManagePlans = Auth::user()?->hasPermission('plans.manage') ?? false; $canValidatePlans = Auth::user()?->hasPermission('plans.validate') ?? false)
+{{-- Vista Blade de planes estrategicos; presenta el detalle del registro seleccionado. --}}
+@php($canManagePlans = Auth::user()?->hasPermission('plans.manage') ?? false; $canValidatePlans = (Auth::user()?->hasPermission('plans.validate') ?? false) || (Auth::user()?->hasPermission('plans.approve') ?? false))
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Detalle del plan estrategico</h2></x-slot>
     <div class="py-8"><div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-4">

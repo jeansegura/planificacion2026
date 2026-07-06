@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para flujo SIPeIP; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +16,7 @@ use Illuminate\Http\RedirectResponse;
 class VerifyEmailController extends Controller
 {
     /**
-     * Mark the authenticated user's email address as verified.
+     * Marca el correo del usuario como verificado.
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {

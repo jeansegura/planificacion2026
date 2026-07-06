@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Migracion de base de datos 2026_06_14_000005_create_institutional_objectives_table.php; crea o modifica tablas necesarias para el modulo flujo SIPeIP.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

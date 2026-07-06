@@ -1,3 +1,4 @@
+{{-- Vista Blade de gestion de roles y permisos; lista registros, filtros y acciones principales. --}}
 @php($canManageRoles = Auth::user()?->hasPermission('roles.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Roles y permisos</h2></x-slot>

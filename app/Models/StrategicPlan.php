@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa planes estrategicos, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,6 +46,7 @@ class StrategicPlan extends Model
         ];
     }
 
+    // Relaciona el plan con su responsable.
     public function responsible(): BelongsTo
     {
         return $this->belongsTo(User::class, 'responsible_user_id');

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de proyectos de inversion; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -17,6 +23,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class InvestmentProjectController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $projects = InvestmentProject::query()
@@ -40,6 +47,7 @@ class InvestmentProjectController extends Controller
         ]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.investment-projects.create', [
@@ -50,6 +58,7 @@ class InvestmentProjectController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -59,6 +68,7 @@ class InvestmentProjectController extends Controller
         return redirect()->route('investment-projects.index')->with('status', 'Proyecto de inversion registrado correctamente.');
     }
 
+    // Muestra el detalle del registro seleccionado.
     public function show(InvestmentProject $investmentProject): View
     {
         $investmentProject->load([
@@ -74,6 +84,7 @@ class InvestmentProjectController extends Controller
         ]);
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(InvestmentProject $investmentProject): View
     {
         return view('sipeip.investment-projects.edit', [
@@ -84,6 +95,7 @@ class InvestmentProjectController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, InvestmentProject $investmentProject): RedirectResponse
     {
         $data = $this->validatedData($request, $investmentProject);
@@ -98,6 +110,7 @@ class InvestmentProjectController extends Controller
         return redirect()->route('investment-projects.index')->with('status', 'Proyecto de inversion actualizado correctamente.');
     }
 
+    // Sube un documento al expediente del proyecto.
     public function storeDocument(Request $request, InvestmentProject $investmentProject): RedirectResponse
     {
         $data = $request->validate([
@@ -129,6 +142,7 @@ class InvestmentProjectController extends Controller
             ->with('status', 'Documento cargado al expediente del proyecto.');
     }
 
+    // Descarga un documento asociado al proyecto.
     public function downloadDocument(InvestmentProject $investmentProject, ProjectDocument $document): StreamedResponse
     {
         abort_unless($document->investment_project_id === $investmentProject->id, 404);
@@ -136,6 +150,7 @@ class InvestmentProjectController extends Controller
         return Storage::download($document->file_path, $document->original_name);
     }
 
+    // Elimina un documento del expediente del proyecto.
     public function destroyDocument(InvestmentProject $investmentProject, ProjectDocument $document): RedirectResponse
     {
         abort_unless($document->investment_project_id === $investmentProject->id, 404);

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de usuarios institucionales; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -16,6 +22,7 @@ use Illuminate\View\View;
 
 class InstitutionalUserController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $users = User::query()
@@ -46,6 +53,7 @@ class InstitutionalUserController extends Controller
         ]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.users.create', [
@@ -62,6 +70,7 @@ class InstitutionalUserController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -96,6 +105,7 @@ class InstitutionalUserController extends Controller
         return $redirect;
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(User $user): View
     {
         return view('sipeip.users.edit', [
@@ -107,6 +117,7 @@ class InstitutionalUserController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, User $user): RedirectResponse
     {
         $data = $this->validatedData($request, $user);
@@ -151,6 +162,7 @@ class InstitutionalUserController extends Controller
         return $redirect;
     }
 
+    // Cambia el estado del usuario a inactivo.
     public function deactivate(User $user): RedirectResponse
     {
         if (auth()->id() === $user->id) {
@@ -163,6 +175,7 @@ class InstitutionalUserController extends Controller
         return back()->with('status', 'Usuario desactivado.');
     }
 
+    // Reactiva un usuario previamente inactivo.
     public function activate(User $user): RedirectResponse
     {
         $user->update(['status' => 'active', 'deactivated_at' => null]);

@@ -1,3 +1,4 @@
+{{-- Vista Blade de alineaciones con el PND; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div><x-input-label for="institutional_objective_id" value="Objetivo institucional" /><select id="institutional_objective_id" name="institutional_objective_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">@foreach ($institutionalObjectives as $objective)<option value="{{ $objective->id }}" @selected((string) old('institutional_objective_id', $alignment->institutional_objective_id) === (string) $objective->id)>{{ $objective->code }} - {{ $objective->name }}</option>@endforeach</select><x-input-error :messages="$errors->get('institutional_objective_id')" class="mt-2" /></div>

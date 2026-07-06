@@ -1,3 +1,4 @@
+{{-- Vista Blade de objetivos institucionales; lista registros, filtros y acciones principales. --}}
 @php($canManageObjectives = Auth::user()?->hasPermission('objectives.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Objetivos institucionales</h2></x-slot>

@@ -1,3 +1,4 @@
+{{-- Vista Blade de perfil del usuario; muestra el formulario para actualizar un registro. --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

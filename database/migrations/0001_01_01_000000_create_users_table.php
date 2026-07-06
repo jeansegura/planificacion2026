@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Migracion de base de datos 0001_01_01_000000_create_users_table.php; crea o modifica tablas necesarias para el modulo flujo SIPeIP.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -7,7 +12,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Ejecuta la migracion y crea o modifica tablas.
      */
     public function up(): void
     {
@@ -38,7 +43,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Revierte la migracion y elimina los cambios.
      */
     public function down(): void
     {

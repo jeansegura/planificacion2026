@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de entidades publicas; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +18,7 @@ use Illuminate\View\View;
 
 class PublicEntityController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $entities = PublicEntity::query()
@@ -28,6 +35,7 @@ class PublicEntityController extends Controller
         return view('sipeip.public-entities.index', ['entities' => $entities]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.public-entities.create', [
@@ -35,6 +43,7 @@ class PublicEntityController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -44,11 +53,13 @@ class PublicEntityController extends Controller
         return redirect()->route('public-entities.index')->with('status', 'Entidad publica registrada correctamente.');
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(PublicEntity $publicEntity): View
     {
         return view('sipeip.public-entities.edit', ['entity' => $publicEntity]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, PublicEntity $publicEntity): RedirectResponse
     {
         $data = $this->validatedData($request, $publicEntity);

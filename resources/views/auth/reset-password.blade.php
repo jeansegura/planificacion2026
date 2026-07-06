@@ -1,3 +1,4 @@
+{{-- Vista Blade de autenticacion; renderiza una parte de la interfaz. --}}
 <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf

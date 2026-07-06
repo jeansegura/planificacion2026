@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa auditoria del sistema, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +33,7 @@ class AuditLog extends Model
         return ['changes' => 'array'];
     }
 
+    // Ejecuta la accion principal de este bloque.
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

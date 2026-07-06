@@ -1,3 +1,4 @@
+{{-- Vista Blade de objetivos del PND; lista registros, filtros y acciones principales. --}}
 @php($canManagePnd = Auth::user()?->hasPermission('pnd.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Objetivos del Plan Nacional de Desarrollo</h2></x-slot>

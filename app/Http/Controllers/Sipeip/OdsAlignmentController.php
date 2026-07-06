@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de alineaciones con ODS; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -14,6 +20,7 @@ use Illuminate\View\View;
 
 class OdsAlignmentController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $alignments = OdsAlignment::query()
@@ -29,6 +36,7 @@ class OdsAlignmentController extends Controller
         ]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.ods-alignments.create', [
@@ -39,6 +47,7 @@ class OdsAlignmentController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -49,6 +58,7 @@ class OdsAlignmentController extends Controller
         return redirect()->route('ods-alignments.index')->with('status', 'Alineacion ODS registrada correctamente.');
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(OdsAlignment $odsAlignment): View
     {
         return view('sipeip.ods-alignments.edit', [
@@ -59,6 +69,7 @@ class OdsAlignmentController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, OdsAlignment $odsAlignment): RedirectResponse
     {
         $data = $this->validatedData($request, $odsAlignment);

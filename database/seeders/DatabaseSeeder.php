@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Seeder que carga datos iniciales para flujo SIPeIP, como roles, permisos, usuarios o catalogos.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -11,7 +17,7 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Carga datos iniciales en la base de datos.
      */
     public function run(): void
     {

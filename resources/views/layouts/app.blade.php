@@ -1,3 +1,4 @@
+{{-- Vista Blade de estructura visual base; renderiza una parte de la interfaz. --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

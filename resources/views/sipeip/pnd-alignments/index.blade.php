@@ -1,4 +1,5 @@
-@php($canManagePnd = Auth::user()?->hasPermission('pnd.manage') ?? false)
+{{-- Vista Blade de alineaciones con el PND; lista registros, filtros y acciones principales. --}}
+@php($canManagePnd = Auth::user()?->hasPermission('pnd.align.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Alineacion con PND</h2></x-slot>
     <div class="py-8"><div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">

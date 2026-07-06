@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de objetivos del PND; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +18,7 @@ use Illuminate\View\View;
 
 class PndObjectiveController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $pndObjectives = PndObjective::query()
@@ -29,6 +36,7 @@ class PndObjectiveController extends Controller
         return view('sipeip.pnd-objectives.index', ['pndObjectives' => $pndObjectives]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.pnd-objectives.create', [
@@ -36,6 +44,7 @@ class PndObjectiveController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -46,11 +55,13 @@ class PndObjectiveController extends Controller
         return redirect()->route('pnd-objectives.index')->with('status', 'Objetivo PND registrado correctamente.');
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(PndObjective $pndObjective): View
     {
         return view('sipeip.pnd-objectives.edit', ['pndObjective' => $pndObjective]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, PndObjective $pndObjective): RedirectResponse
     {
         $data = $this->validatedData($request, $pndObjective);

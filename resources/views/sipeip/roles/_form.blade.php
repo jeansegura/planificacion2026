@@ -1,3 +1,4 @@
+{{-- Vista Blade de gestion de roles y permisos; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="space-y-4">
     <div><x-input-label for="name" value="Nombre del rol" /><x-text-input id="name" name="name" class="mt-1 block w-full" value="{{ old('name', $role->name) }}" required /><x-input-error :messages="$errors->get('name')" class="mt-2" /></div>

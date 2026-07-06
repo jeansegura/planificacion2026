@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de auditoria del sistema; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -9,6 +15,7 @@ use Illuminate\View\View;
 
 class AuditLogController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $logs = AuditLog::query()

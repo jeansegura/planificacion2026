@@ -1,3 +1,4 @@
+{{-- Vista Blade de proyectos de inversion y expedientes; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div><x-input-label for="public_entity_id" value="Entidad" /><select id="public_entity_id" name="public_entity_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><option value="">Sin entidad</option>@foreach ($entities as $entity)<option value="{{ $entity->id }}" @selected((string) old('public_entity_id', $project->public_entity_id) === (string) $entity->id)>{{ $entity->code }} - {{ $entity->name }}</option>@endforeach</select></div>

@@ -1,3 +1,4 @@
+{{-- Vista Blade de autenticacion; renderiza una parte de la interfaz. --}}
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}

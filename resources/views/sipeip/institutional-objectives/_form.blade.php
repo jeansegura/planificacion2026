@@ -1,3 +1,4 @@
+{{-- Vista Blade de objetivos institucionales; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div><x-input-label for="code" value="Codigo" /><x-text-input id="code" name="code" class="mt-1 block w-full" value="{{ old('code', $objective->code) }}" required /><x-input-error :messages="$errors->get('code')" class="mt-2" /></div>

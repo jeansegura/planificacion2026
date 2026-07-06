@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa entidades publicas, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,11 +27,13 @@ class PublicEntity extends Model
         'status',
     ];
 
+    // Obtiene los proyectos de inversion de la entidad.
     public function investmentProjects(): HasMany
     {
         return $this->hasMany(InvestmentProject::class);
     }
 
+    // Filtra solo registros activos.
     public function scopeActive($query)
     {
         return $query->where('status', 'active');

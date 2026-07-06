@@ -1,3 +1,4 @@
+{{-- Vista Blade de autenticacion; permite iniciar sesion. --}}
 <x-guest-layout>
     <div style="margin-bottom: 26px;">
         <p style="color: #003893; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;">Acceso seguro</p>

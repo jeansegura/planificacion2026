@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Define las rutas de autenticacion: login, registro, recuperacion de clave y verificacion.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;

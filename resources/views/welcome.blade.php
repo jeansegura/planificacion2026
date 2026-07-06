@@ -1,3 +1,4 @@
+{{-- Vista Blade de pantalla del sistema; presenta la portada publica del proyecto. --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

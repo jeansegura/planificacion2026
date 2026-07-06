@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de planes estrategicos; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -13,6 +19,7 @@ use Illuminate\View\View;
 
 class StrategicPlanController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $plans = StrategicPlan::query()
@@ -34,6 +41,7 @@ class StrategicPlanController extends Controller
         ]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.strategic-plans.create', [
@@ -43,6 +51,7 @@ class StrategicPlanController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -55,6 +64,7 @@ class StrategicPlanController extends Controller
         return redirect()->route('strategic-plans.index')->with('status', 'Plan estrategico registrado correctamente.');
     }
 
+    // Muestra el detalle del registro seleccionado.
     public function show(StrategicPlan $strategicPlan): View
     {
         return view('sipeip.strategic-plans.show', [
@@ -63,6 +73,7 @@ class StrategicPlanController extends Controller
         ]);
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(StrategicPlan $strategicPlan): View
     {
         return view('sipeip.strategic-plans.edit', [
@@ -72,6 +83,7 @@ class StrategicPlanController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, StrategicPlan $strategicPlan): RedirectResponse
     {
         $data = $this->validatedData($request, $strategicPlan);
@@ -89,6 +101,7 @@ class StrategicPlanController extends Controller
         return redirect()->route('strategic-plans.index')->with('status', 'Plan estrategico actualizado correctamente.');
     }
 
+    // Actualiza el estado de revision del registro.
     public function changeStatus(Request $request, StrategicPlan $strategicPlan): RedirectResponse
     {
         $data = $request->validate([

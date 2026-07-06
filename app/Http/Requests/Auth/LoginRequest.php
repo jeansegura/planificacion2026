@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Request de validacion para validacion de acceso; concentra reglas antes de ejecutar la accion del controlador.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
@@ -21,7 +27,7 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Define las reglas de validacion de la solicitud.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -77,7 +83,7 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Get the rate limiting throttle key for the request.
+     * Obtiene la clave usada para limitar intentos de acceso.
      */
     public function throttleKey(): string
     {

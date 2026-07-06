@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de reportes; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -16,6 +22,7 @@ use Illuminate\View\View;
 
 class ReportController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(): View
     {
         return view('sipeip.reports.index', [
@@ -23,6 +30,7 @@ class ReportController extends Controller
         ]);
     }
 
+    // Ejecuta la accion principal de este bloque.
     public function export(string $dataset, string $format): Response
     {
         abort_unless(array_key_exists($dataset, $this->datasets()), 404);

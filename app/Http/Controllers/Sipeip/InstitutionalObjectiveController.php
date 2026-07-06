@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de objetivos institucionales; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -13,6 +19,7 @@ use Illuminate\View\View;
 
 class InstitutionalObjectiveController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $objectives = InstitutionalObjective::query()
@@ -34,6 +41,7 @@ class InstitutionalObjectiveController extends Controller
         ]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.institutional-objectives.create', [
@@ -43,6 +51,7 @@ class InstitutionalObjectiveController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -53,6 +62,7 @@ class InstitutionalObjectiveController extends Controller
         return redirect()->route('institutional-objectives.index')->with('status', 'Objetivo institucional registrado correctamente.');
     }
 
+    // Muestra el detalle del registro seleccionado.
     public function show(InstitutionalObjective $institutionalObjective): View
     {
         return view('sipeip.institutional-objectives.show', [
@@ -61,6 +71,7 @@ class InstitutionalObjectiveController extends Controller
         ]);
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(InstitutionalObjective $institutionalObjective): View
     {
         return view('sipeip.institutional-objectives.edit', [
@@ -70,6 +81,7 @@ class InstitutionalObjectiveController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, InstitutionalObjective $institutionalObjective): RedirectResponse
     {
         $data = $this->validatedData($request, $institutionalObjective);
@@ -84,6 +96,7 @@ class InstitutionalObjectiveController extends Controller
         return redirect()->route('institutional-objectives.index')->with('status', 'Objetivo institucional actualizado correctamente.');
     }
 
+    // Actualiza el estado de revision del registro.
     public function changeStatus(Request $request, InstitutionalObjective $institutionalObjective): RedirectResponse
     {
         $data = $request->validate([

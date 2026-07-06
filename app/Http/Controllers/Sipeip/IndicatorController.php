@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador MVC del modulo de indicadores; recibe solicitudes, valida datos y entrega vistas o descargas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Sipeip;
 
 use App\Http\Controllers\Controller;
@@ -14,6 +20,7 @@ use Illuminate\View\View;
 
 class IndicatorController extends Controller
 {
+    // Lista los registros y aplica filtros de busqueda.
     public function index(Request $request): View
     {
         $indicators = Indicator::query()
@@ -30,6 +37,7 @@ class IndicatorController extends Controller
         return view('sipeip.indicators.index', ['indicators' => $indicators]);
     }
 
+    // Muestra el formulario para crear un nuevo registro.
     public function create(): View
     {
         return view('sipeip.indicators.create', [
@@ -39,6 +47,7 @@ class IndicatorController extends Controller
         ]);
     }
 
+    // Valida y guarda un nuevo registro en la base de datos.
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validatedData($request);
@@ -48,6 +57,7 @@ class IndicatorController extends Controller
         return redirect()->route('indicators.index')->with('status', 'Indicador registrado correctamente.');
     }
 
+    // Carga el formulario para editar un registro existente.
     public function edit(Indicator $indicator): View
     {
         return view('sipeip.indicators.edit', [
@@ -57,6 +67,7 @@ class IndicatorController extends Controller
         ]);
     }
 
+    // Valida cambios y actualiza el registro seleccionado.
     public function update(Request $request, Indicator $indicator): RedirectResponse
     {
         $data = $this->validatedData($request, $indicator);

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para gestion de claves; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +18,7 @@ use Illuminate\View\View;
 class ConfirmablePasswordController extends Controller
 {
     /**
-     * Show the confirm password view.
+     * Muestra la confirmacion de clave.
      */
     public function show(): View
     {
@@ -20,7 +26,7 @@ class ConfirmablePasswordController extends Controller
     }
 
     /**
-     * Confirm the user's password.
+     * Confirma la clave del usuario.
      */
     public function store(Request $request): RedirectResponse
     {

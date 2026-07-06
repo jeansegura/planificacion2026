@@ -1,3 +1,4 @@
+{{-- Vista Blade de gestion de usuarios institucionales; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div><x-input-label for="name" value="Nombre completo" /><x-text-input id="name" name="name" class="mt-1 block w-full" value="{{ old('name', $user->name) }}" required /><x-input-error :messages="$errors->get('name')" class="mt-2" /></div>

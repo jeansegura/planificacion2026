@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para usuarios institucionales; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -16,7 +22,7 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Muestra la pantalla de registro.
      */
     public function create(): View
     {
@@ -24,7 +30,7 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
+     * Procesa el registro de un nuevo usuario.
      *
      * @throws ValidationException
      */

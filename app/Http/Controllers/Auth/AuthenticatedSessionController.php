@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para inicio y cierre de sesion; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +18,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Muestra la pantalla de acceso.
      */
     public function create(): View
     {
@@ -20,7 +26,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Procesa el inicio de sesion.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -32,7 +38,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
+     * Cierra la sesion autenticada.
      */
     public function destroy(Request $request): RedirectResponse
     {

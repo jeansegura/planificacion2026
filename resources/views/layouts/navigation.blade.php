@@ -1,3 +1,4 @@
+{{-- Vista Blade de estructura visual base; renderiza una parte de la interfaz. --}}
 @php
     $user = Auth::user();
     $can = fn (string $permission): bool => $user?->hasPermission($permission) ?? false;

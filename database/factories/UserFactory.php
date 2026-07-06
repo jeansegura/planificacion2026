@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Factory que genera datos de prueba para usuarios institucionales durante pruebas automatizadas o semillas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace Database\Factories;
 
 use App\Models\User;
@@ -13,12 +19,12 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * Clave que usa la factory para usuarios de prueba.
      */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
+     * Define los datos base del modelo de prueba.
      *
      * @return array<string, mixed>
      */
@@ -34,7 +40,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Genera el usuario con correo sin verificar.
      */
     public function unverified(): static
     {

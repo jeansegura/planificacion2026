@@ -1,3 +1,4 @@
+{{-- Vista Blade de planes estrategicos; lista registros, filtros y acciones principales. --}}
 @php($canManagePlans = Auth::user()?->hasPermission('plans.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Planes estrategicos institucionales</h2></x-slot>

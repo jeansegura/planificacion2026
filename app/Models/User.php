@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa usuarios institucionales, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Database\Factories\UserFactory;
@@ -45,31 +51,37 @@ class User extends Authenticatable
         ];
     }
 
+    // Relaciona el usuario con su rol institucional.
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
 
+    // Relaciona el usuario con su entidad publica.
     public function publicEntity(): BelongsTo
     {
         return $this->belongsTo(PublicEntity::class);
     }
 
+    // Obtiene los planes estrategicos vinculados.
     public function strategicPlans(): HasMany
     {
         return $this->hasMany(StrategicPlan::class, 'responsible_user_id');
     }
 
+    // Obtiene los eventos de auditoria del usuario.
     public function auditLogs(): HasMany
     {
         return $this->hasMany(AuditLog::class);
     }
 
+    // Comprueba si el usuario esta activo.
     public function isActive(): bool
     {
         return $this->status === 'active';
     }
 
+    // Verifica si el usuario tiene un permiso especifico.
     public function hasPermission(string $permission): bool
     {
         if ((int) $this->id === 1) {

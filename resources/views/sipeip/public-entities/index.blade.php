@@ -1,3 +1,4 @@
+{{-- Vista Blade de entidades publicas; lista registros, filtros y acciones principales. --}}
 @php($canManageEntities = Auth::user()?->hasPermission('entities.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Entidades publicas</h2></x-slot>

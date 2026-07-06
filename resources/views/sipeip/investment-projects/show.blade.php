@@ -1,3 +1,4 @@
+{{-- Vista Blade de proyectos de inversion y expedientes; presenta el detalle del registro seleccionado. --}}
 @php($canManageProjects = Auth::user()?->hasPermission('projects.manage') ?? false)
 <x-app-layout>
     <x-slot name="header">

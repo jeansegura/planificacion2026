@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para gestion de claves; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +18,7 @@ use Illuminate\View\View;
 class PasswordResetLinkController extends Controller
 {
     /**
-     * Display the password reset link request view.
+     * Muestra la solicitud para recuperar clave.
      */
     public function create(): View
     {
@@ -20,7 +26,7 @@ class PasswordResetLinkController extends Controller
     }
 
     /**
-     * Handle an incoming password reset link request.
+     * Envia el enlace para recuperar clave.
      *
      * @throws ValidationException
      */
@@ -30,9 +36,8 @@ class PasswordResetLinkController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+        // Envia el enlace de recuperacion al correo indicado.
+        // Luego muestra el mensaje de exito o error segun la respuesta.
         $status = Password::sendResetLink(
             $request->only('email')
         );

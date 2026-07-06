@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para gestion de claves; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -11,7 +17,7 @@ use Illuminate\Validation\Rules\Password;
 class PasswordController extends Controller
 {
     /**
-     * Update the user's password.
+     * Actualiza la clave del usuario.
      */
     public function update(Request $request): RedirectResponse
     {

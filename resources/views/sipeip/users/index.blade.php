@@ -1,3 +1,4 @@
+{{-- Vista Blade de gestion de usuarios institucionales; lista registros, filtros y acciones principales. --}}
 @php($canManageUsers = Auth::user()?->hasPermission('users.manage') ?? false)
 <x-app-layout>
     <x-slot name="header">

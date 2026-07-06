@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Define las rutas web del sistema SIPeIP, sus controladores, nombres y permisos requeridos.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sipeip\AuditLogController;
 use App\Http\Controllers\Sipeip\IndicatorController;
@@ -31,6 +36,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Panel principal: muestra indicadores segun permisos del usuario autenticado.
 Route::get('/dashboard', function () {
     return view('dashboard', [
         'usersCount' => User::count(),
@@ -51,10 +57,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Perfil personal disponible para todo usuario autenticado.
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Configuracion de usuarios: solo administradores gestionan altas, roles y estados.
     Route::get('/users', [InstitutionalUserController::class, 'index'])
         ->middleware('permission:users.view')
         ->name('users.index');
@@ -79,6 +87,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:users.manage')
         ->name('users.activate');
 
+    // Configuracion RBAC: administra los roles y permisos funcionales del sistema.
     Route::get('/roles', [RoleController::class, 'index'])
         ->middleware('permission:roles.view')
         ->name('roles.index');
@@ -100,6 +109,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:roles.manage')
         ->name('roles.destroy');
 
+    // Planes estrategicos: tecnicos registran y revisores/autoridades cambian estado.
     Route::get('/strategic-plans', [StrategicPlanController::class, 'index'])
         ->middleware('permission:plans.view')
         ->name('strategic-plans.index');
@@ -121,9 +131,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/strategic-plans/{strategicPlan}', [StrategicPlanController::class, 'update'])
         ->middleware('permission:plans.manage');
     Route::patch('/strategic-plans/{strategicPlan}/status', [StrategicPlanController::class, 'changeStatus'])
-        ->middleware('permission:plans.validate')
+        ->middleware('permission:plans.validate,plans.approve')
         ->name('strategic-plans.status');
 
+    // Objetivos institucionales: registra OEI y controla su validacion/aprobacion.
     Route::get('/institutional-objectives', [InstitutionalObjectiveController::class, 'index'])
         ->middleware('permission:objectives.view')
         ->name('institutional-objectives.index');
@@ -145,9 +156,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/institutional-objectives/{institutionalObjective}', [InstitutionalObjectiveController::class, 'update'])
         ->middleware('permission:objectives.manage');
     Route::patch('/institutional-objectives/{institutionalObjective}/status', [InstitutionalObjectiveController::class, 'changeStatus'])
-        ->middleware('permission:objectives.validate')
+        ->middleware('permission:objectives.validate,objectives.approve')
         ->name('institutional-objectives.status');
 
+    // Catalogo PND: administra objetivos nacionales usados para alineacion.
     Route::get('/pnd-objectives', [PndObjectiveController::class, 'index'])
         ->middleware('permission:pnd.view')
         ->name('pnd-objectives.index');
@@ -164,22 +176,24 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:pnd.manage')
         ->name('pnd-objectives.update');
 
+    // Alineacion PND: conecta objetivos institucionales con objetivos nacionales.
     Route::get('/pnd-alignments', [PndAlignmentController::class, 'index'])
         ->middleware('permission:pnd.view')
         ->name('pnd-alignments.index');
     Route::get('/pnd-alignments/create', [PndAlignmentController::class, 'create'])
-        ->middleware('permission:pnd.manage')
+        ->middleware('permission:pnd.align.manage')
         ->name('pnd-alignments.create');
     Route::post('/pnd-alignments', [PndAlignmentController::class, 'store'])
-        ->middleware('permission:pnd.manage')
+        ->middleware('permission:pnd.align.manage')
         ->name('pnd-alignments.store');
     Route::get('/pnd-alignments/{pndAlignment}/edit', [PndAlignmentController::class, 'edit'])
-        ->middleware('permission:pnd.manage')
+        ->middleware('permission:pnd.align.manage,pnd.validate')
         ->name('pnd-alignments.edit');
     Route::put('/pnd-alignments/{pndAlignment}', [PndAlignmentController::class, 'update'])
-        ->middleware('permission:pnd.manage')
+        ->middleware('permission:pnd.align.manage,pnd.validate')
         ->name('pnd-alignments.update');
 
+    // Catalogo ODS: lista y mantiene los Objetivos de Desarrollo Sostenible.
     Route::get('/sdgs', [SdgController::class, 'index'])
         ->middleware('permission:ods.view')
         ->name('sdgs.index');
@@ -190,22 +204,24 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:ods.manage')
         ->name('sdgs.update');
 
+    // Alineacion ODS: registra la contribucion de objetivos institucionales a Agenda 2030.
     Route::get('/ods-alignments', [OdsAlignmentController::class, 'index'])
         ->middleware('permission:ods.view')
         ->name('ods-alignments.index');
     Route::get('/ods-alignments/create', [OdsAlignmentController::class, 'create'])
-        ->middleware('permission:ods.manage')
+        ->middleware('permission:ods.align.manage')
         ->name('ods-alignments.create');
     Route::post('/ods-alignments', [OdsAlignmentController::class, 'store'])
-        ->middleware('permission:ods.manage')
+        ->middleware('permission:ods.align.manage')
         ->name('ods-alignments.store');
     Route::get('/ods-alignments/{odsAlignment}/edit', [OdsAlignmentController::class, 'edit'])
-        ->middleware('permission:ods.manage')
+        ->middleware('permission:ods.align.manage,ods.validate')
         ->name('ods-alignments.edit');
     Route::put('/ods-alignments/{odsAlignment}', [OdsAlignmentController::class, 'update'])
-        ->middleware('permission:ods.manage')
+        ->middleware('permission:ods.align.manage,ods.validate')
         ->name('ods-alignments.update');
 
+    // Entidades publicas: catalogo institucional y estructura sectorial.
     Route::get('/public-entities', [PublicEntityController::class, 'index'])
         ->middleware('permission:entities.view')
         ->name('public-entities.index');
@@ -222,6 +238,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:entities.manage')
         ->name('public-entities.update');
 
+    // Metas institucionales: seguimiento anual o plurianual por objetivo.
     Route::get('/goals', [InstitutionalGoalController::class, 'index'])
         ->middleware('permission:goals.view')
         ->name('goals.index');
@@ -238,6 +255,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:goals.manage')
         ->name('goals.update');
 
+    // Indicadores: mide avance de metas y objetivos con formula y periodicidad.
     Route::get('/indicators', [IndicatorController::class, 'index'])
         ->middleware('permission:goals.view')
         ->name('indicators.index');
@@ -254,6 +272,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:goals.manage')
         ->name('indicators.update');
 
+    // Proyectos de inversion: gestiona presupuesto, estado y expediente documental.
     Route::get('/investment-projects', [InvestmentProjectController::class, 'index'])
         ->middleware('permission:projects.view')
         ->name('investment-projects.index');
@@ -282,10 +301,12 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:projects.manage')
         ->name('investment-projects.documents.destroy');
 
+    // Auditoria: consulta trazas de acciones realizadas por usuarios.
     Route::get('/audit-logs', [AuditLogController::class, 'index'])
         ->middleware('permission:audit.view')
         ->name('audit-logs.index');
 
+    // Reportes: exporta informacion consolidada en formatos tecnicos.
     Route::get('/reports', [ReportController::class, 'index'])
         ->middleware('permission:reports.view')
         ->name('reports.index');

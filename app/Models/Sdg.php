@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa objetivos ODS, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +23,7 @@ class Sdg extends Model
         'status',
     ];
 
+    // Obtiene las alineaciones asociadas al catalogo.
     public function alignments(): HasMany
     {
         return $this->hasMany(OdsAlignment::class);

@@ -1,3 +1,4 @@
+{{-- Vista Blade de indicadores; centraliza campos compartidos por crear y editar. --}}
 @csrf
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div><x-input-label for="institutional_goal_id" value="Meta" /><select id="institutional_goal_id" name="institutional_goal_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><option value="">Sin meta</option>@foreach ($goals as $goal)<option value="{{ $goal->id }}" @selected((string) old('institutional_goal_id', $indicator->institutional_goal_id) === (string) $goal->id)>{{ $goal->code }} - {{ $goal->name }}</option>@endforeach</select></div>

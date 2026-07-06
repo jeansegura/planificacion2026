@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Controlador de autenticacion para verificacion de correo; administra formularios y acciones de seguridad.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -9,7 +15,7 @@ use Illuminate\Http\Request;
 class EmailVerificationNotificationController extends Controller
 {
     /**
-     * Send a new email verification notification.
+     * Envia una nueva notificacion de verificacion.
      */
     public function store(Request $request): RedirectResponse
     {

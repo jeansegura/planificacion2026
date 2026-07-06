@@ -1,3 +1,4 @@
+{{-- Vista Blade de metas institucionales; lista registros, filtros y acciones principales. --}}
 @php($canManageGoals = Auth::user()?->hasPermission('goals.manage') ?? false)
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Metas institucionales</h2></x-slot>

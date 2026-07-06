@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Modelo Eloquent que representa alineaciones con ODS, define campos editables y relaciones con otras tablas.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,11 +32,13 @@ class OdsAlignment extends Model
         'observations',
     ];
 
+    // Relaciona el registro con su objetivo institucional.
     public function institutionalObjective(): BelongsTo
     {
         return $this->belongsTo(InstitutionalObjective::class);
     }
 
+    // Relaciona la alineacion con el ODS.
     public function sdg(): BelongsTo
     {
         return $this->belongsTo(Sdg::class);

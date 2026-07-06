@@ -1,3 +1,4 @@
+{{-- Vista Blade de pantalla del sistema; resume indicadores generales del sistema. --}}
 @php
     $user = Auth::user();
     $can = fn (string $permission): bool => $user?->hasPermission($permission) ?? false;

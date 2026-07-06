@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Proveedor de Laravel donde se registran configuraciones y servicios globales de la aplicacion.
+ *
+ * Mantiene documentada la responsabilidad de esta hoja de codigo dentro del MVC.
+ */
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -7,7 +13,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Registra servicios generales de la aplicacion.
      */
     public function register(): void
     {
@@ -15,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Inicializa servicios generales de la aplicacion.
      */
     public function boot(): void
     {
